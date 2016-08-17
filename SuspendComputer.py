@@ -15,12 +15,16 @@ def get_battery_status():
     array_file = []
     for line in battery_status_file:
         array_file.append(line)
+    file_size = array_file.__len__()
     # Status can be: charging, discharging or fully-charged
-    status = array_file[0]
+    status = array_file[file_size - 2]
     status = status.split(":")
     status = status[1].strip()
     # Battery percentage: from 15 % to 100 %
-    percentage = array_file[2]
+    if "fully-charged" == status:
+        percentage = array_file[file_size - 1]
+    else:
+        percentage = array_file[file_size]
     percentage = percentage.split(":")
     percentage = percentage[1]
     percentage = percentage.strip()
