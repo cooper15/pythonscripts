@@ -7,7 +7,7 @@ import logging
 BATTERY_STATUS_COMMAND = 'upower -i $(upower -e | grep BAT) ' \
                          '| grep --color=never -E "state|to\ full|to\ empty|percentage"'
 SUSPEND_COMMAND = "systemctl suspend"
-MINIMUM_PERCENTAGE = '17%'
+MINIMUM_PERCENTAGE = 0.17
 
 
 def get_battery_status():
@@ -28,35 +28,25 @@ def get_battery_status():
     percentage = percentage.split(":")
     percentage = percentage[1]
     percentage = percentage.strip()
+    percentage = percentage.replace("%", "")
+    percentage = percentage.strip()
     array_file = [status, percentage]
     return array_file
-
-
-def notification(message_type):
-    if 1 == message_type:
-        message = "The system will be suspend in 10 seconds."
-    elif 2 == message_type:
-        message = "Starting Battery status Script."
-
-    pynotify.init("Attention")
-    notice = pynotify.Notification("Attention!", message)
-    notice.show()
 
 
 def principal_loop():
     logging.basicConfig(
         format='%(asctime)s %(message)s', filename="/home/cooper15/.scripts/suspend_status.log", level=logging.DEBUG)
     logging.debug("starting")
-    notification(2)
     while True:
         battery_status = get_battery_status()
         print battery_status[0]
-        if "discharging" == battery_status[0] and battery_status[1] < MINIMUM_PERCENTAGE:
-            notification(1)
-            sleep(10)
+        batt_perc = float(battery_status[1]) / 100
+        if "discharging" == battery_status[0] and batt_perc < MINIMUM_PERCENTAGE:
+            sleep(3)
             logging.debug("Suspending battery percentage " + battery_status[1])
             os.system(SUSPEND_COMMAND)
-        elif "discharging" == battery_status[0] and battery_status[1] > MINIMUM_PERCENTAGE:
+        elif "discharging" == battery_status[0] and batt_perc > MINIMUM_PERCENTAGE:
             logging.debug("Sleeping script +60 seconds" + battery_status[1])
             sleep(30)
         elif "charging" == battery_status[0] or "fully-charged" == battery_status[0]:
