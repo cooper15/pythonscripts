@@ -36,7 +36,7 @@ def get_battery_status():
 
 def principal_loop():
     logging.basicConfig(
-        format='%(asctime)s %(message)s', filename="/home/cooper15/.scripts/suspend_status.log", level=logging.DEBUG)
+        format='%(asctime)s %(message)s', filename="suspend_status.log", level=logging.DEBUG)
     logging.debug("starting")
     while True:
         battery_status = get_battery_status()
