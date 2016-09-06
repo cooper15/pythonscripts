@@ -21,8 +21,8 @@ layout = layout_temp_list[0].split(":")
 
 if str(layout[1]).__contains__("us"):
     os.system("setxkbmap latam")
-    notify(layout[1])
+    notify("ES-Latam")
 
 elif str(layout[1]).__contains__("latam"):
     os.system("setxkbmap us")
-    notify(layout[1])
+    notify("US")
