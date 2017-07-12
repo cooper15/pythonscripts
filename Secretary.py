@@ -14,10 +14,10 @@ TUPLE_IMAGE_FILTERS = (".*jpg.*", ".*.png.*")
 
 # Final paths
 # ---------------------------------------------------------------------------------------
-ORIGIN_PATH = "/home/cooper15/Descargas/"
-PICTURES_FINAL_PATH = " /home/cooper15/Imágenes/"
-COMPROBANTES_FINAL_PATH = " /home/cooper15/Dropbox/Comprobantes_de_Pago_electronico/"
-DOCUMENTS_FINAL_PATH =" /home/cooper15/Documentos"
+ORIGIN_PATH = " ~/Descargas/"
+PICTURES_FINAL_PATH = " ~/Imágenes/"
+COMPROBANTES_FINAL_PATH = " ~/Dropbox/Comprobantes_de_Pago_electronico/"
+DOCUMENTS_FINAL_PATH =" ~/Documentos"
 # ---------------------------------------------------------------------------------------
 
 def get_pictures():
@@ -44,7 +44,7 @@ def get_documents():
 
 if __name__ == '__main__':
     logging.basicConfig(
-        format='%(asctime)s %(message)s', filename="/home/cooper15/.scripts/secretary_mv.log", level=logging.DEBUG)
+        format='%(asctime)s %(message)s', filename="secretary_mv.log", level=logging.DEBUG)
     logging.debug("starting")
     while True:
         for picture in get_pictures():
