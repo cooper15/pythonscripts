@@ -1,6 +1,6 @@
 # Python scripts for the Gnu/Linux system.
 System scripts written in python. Chances keyboard layout, battery low suspend system, etc.
-I wrote those scripts to using it with a WM like openbox, but they can be used with any WM that doesn't has native support for change keyboard layout, suspend the system when the battery is in a low level, etc.
+I wrote those scripts for using them with a WM like openbox, but they can be used with any WM that doesn't has native support for change keyboard layout, suspend the system when the battery is in a low level, etc.
 
 Be free to copy and modify them.
 
